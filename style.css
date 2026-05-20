@@ -1,0 +1,449 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+:root {
+  --bg: #12131a;
+  --card: #1f2430;
+  --accent: #ff6464;
+  --text: #eef2ff;
+  --muted: #9aa5c1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family:'Press Start 2P', Inter, Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  background: 
+    radial-gradient(circle at top, #e64545 0%, transparent 60%),
+    radial-gradient(circle at bottom, #e64545 0%, transparent 60%),
+    #ffffff;
+  color: var(--text);
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  filter: blur(40px);
+  z-index: 0;
+}
+
+.screen {
+  width: min(1500px, calc(100vw - 20px));
+  /* Sets a baseline height so it's never too short, but lets it grow if content overflows */
+  min-height: 80vh; 
+  padding: 48px;
+  border-radius: 24px;
+  position: relative;
+  z-index: 1;
+  
+  /* Optional: If you want the content inside this tall screen to be centered nicely */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.box {
+  display: grid;
+  gap: 20px;
+  text-align: center;
+  justify-items: center;
+}
+
+h1,
+h2 {
+  margin: 10;
+}
+
+button {
+  padding: 16px 32px;
+  border: 4px solid rgba(0, 0, 0, 0.25);
+  border-radius: 0;
+  background: var(--accent);
+  color: white;
+  font-size: 0.95rem;
+  font-family: 'Press Start 2P', 'MuseoModerno', Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  width: fit-content;
+  min-width: 220px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.15), 0 10px 0 rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.2), 0 12px 0 rgba(0, 0, 0, 0.18);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.2), 0 4px 0 rgba(0, 0, 0, 0.18);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  border: 4px solid rgba(0, 0, 0, 0.35);
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #ffc863;
+  box-shadow: inset -4px 0 0 rgba(255, 255, 255, 0.18);
+  transition: width 0.2s ease;
+}
+
+.transition-visual {
+  width: 100%;
+  max-width: 720px;
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.pixel-grid {
+  width: 100%;
+  height: 16px;
+  background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.18) 8px, transparent 8px, transparent 16px);
+  position: relative;
+  overflow: hidden;
+}
+
+.pixel-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 45%, rgba(255, 255, 255, 0.3) 55%, transparent 100%);
+  transform: translateX(-100%);
+  animation: pixel-scan 1.2s linear infinite;
+}
+
+#transition-screen h2,
+#transition-screen p {
+  color: white;
+}
+
+#transition-screen h2 {
+  font-size: 2rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+#transition-screen p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.date-card {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 4px solid rgba(255, 255, 255, 0.16);
+  border-radius: 28px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.2);
+  padding: 36px;
+}
+
+.date-layout {
+  display: grid;
+  gap: 32px;
+  align-items: start;
+  justify-items: center;
+}
+
+.calendar-preview {
+  padding: 28px;
+  width: min(520px, 100%);
+  border: 4px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.calendar-header {
+  font-size: 0.9rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 12px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.calendar-grid span {
+  display: grid;
+  place-items: center;
+  padding: 10px 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+}
+
+.calendar-day {
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+}
+
+.calendar-day.empty {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.calendar-day.selected {
+  background: rgba(255, 255, 255, 0.23);
+}
+
+.date-fields {
+  display: grid;
+  gap: 18px;
+  width: min(520px, 100%);
+}
+
+.date-fields label {
+  display: grid;
+  gap: 10px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.date-fields input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 4px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.date-fields input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.form-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  justify-content: center;
+}
+
+#confirm-button,
+#date-back-button {
+  min-width: 0;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 980px;
+  padding-top: 14px;
+}
+
+.food-card {
+  position: relative;
+  min-height: 420px;
+  padding: 28px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.food-card:hover {
+  transform: translateY(-14px) scale(1.03);
+  box-shadow: 0 38px 90px rgba(214, 214, 214, 0.18);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.food-card img {
+  width: 100%;
+  height: 100%;
+  max-height: 340px;
+  border-radius: 24px;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.22));
+  animation: float 6s ease-in-out infinite;
+}
+
+.food-card img[alt] {
+  min-height: 160px;
+}
+
+.food-name {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translate(-50%, 8px) scale(0.95);
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--text);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.food-card:hover .food-name {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pixel-scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.hidden {
+  display: none;
+}
+
+#main-menu-screen p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.menu-header {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.menu-header h1 {
+  font-size: 2.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 28px;
+  margin: 0 auto;
+  width: 100%;
+  padding-top: 14px;
+}
+
+.food-card {
+  position: relative;
+  min-height: 420px;
+  padding: 28px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.food-card:hover {
+  transform: translateY(-14px) scale(1.03);
+  box-shadow: 0 38px 90px rgba(214, 214, 214, 0.18);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.food-card img {
+  width: 100%;
+  height: 100%;
+  max-height: 340px;
+  border-radius: 24px;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.22));
+  animation: float 6s ease-in-out infinite;
+}
+
+.food-card img[alt] {
+  min-height: 160px;
+}
+
+.food-name {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translate(-50%, 8px) scale(0.95);
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--text);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.food-card:hover .food-name {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.menu-actions {
+  display: grid;
+  gap: 14px;
+  padding-top: 16px;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+#main-menu-screen button {
+  width: 100%;
+  max-width: 100%;
+  justify-self: center;
+}
+

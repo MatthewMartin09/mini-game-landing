@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Game Landing Page</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="screen" id="landing-screen">
+    <div class="box">
+      <h1>Are you ready?</h1>
+      <button id="start-button">PRESS START</button>
+    </div>
+  </div>
+
+  <div class="screen hidden" id="loading-screen">
+    <div class="box">
+      <h2>Loading...</h2>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <p id="progress-text">0%</p>
+    </div>
+  </div>
+
+  <div class="screen hidden" id="transition-screen">
+    <div class="box">
+      <div class="transition-visual">
+        <div class="pixel-grid"></div>
+        <div class="pixel-grid"></div>
+        <div class="pixel-grid"></div>
+      </div>
+      <h2>I Like you</h2>
+      <p>Preparing...</p>
+    </div>
+  </div>
+
+  <div class="screen hidden" id="main-menu-screen">
+    <div class="box">
+      <div class="menu-header">
+        <h1>Pick one!</h1>
+      </div>
+
+      <div class="image-grid">
+        <div class="food-card">
+          <span class="food-name">Ramen</span>
+          <img src="ramen.png" alt="Ramen" />
+        </div>
+        <div class="food-card">
+          <span class="food-name">Matcha</span>
+          <img src="matcha.png" alt="Matcha" />
+        </div>
+        <div class="food-card">
+          <span class="food-name">Pasta</span>
+          <img src="pasta.png" alt="Pasta" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen hidden" id="date-screen">
+    <div class="box date-card">
+      <div class="menu-header">
+        <h1>Set the date</h1>
+        <p id="selected-food-label">Choose your date details</p>
+      </div>
+
+      <div class="date-layout">
+        <div class="calendar-preview">
+          <div class="calendar-header">Calendar</div>
+          <div class="calendar-grid">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+            <span class="calendar-day empty"></span>
+            <span class="calendar-day empty"></span>
+            <span class="calendar-day">1</span>
+            <span class="calendar-day">2</span>
+            <span class="calendar-day">3</span>
+            <span class="calendar-day">4</span>
+            <span class="calendar-day">5</span>
+            <span class="calendar-day">6</span>
+            <span class="calendar-day selected">7</span>
+            <span class="calendar-day">8</span>
+            <span class="calendar-day">9</span>
+            <span class="calendar-day">10</span>
+            <span class="calendar-day">11</span>
+            <span class="calendar-day">12</span>
+          </div>
+        </div>
+
+        <form class="date-fields" id="date-form">
+          <label>
+            Date
+            <input type="date" id="date" required />
+          </label>
+          <label>
+            Time
+            <input type="time" id="time" required />
+          </label>
+          <label>
+            Location
+            <input type="text" id="location" placeholder="Where is the date?" required />
+          </label>
+          <label>
+            Outfit theme
+            <input type="text" id="outfit-theme" placeholder="What should we wear?" required />
+          </label>
+          <label>
+            Punishment if late
+            <input type="text" id="punishment" placeholder="What happens if you're late?" required />
+          </label>
+          <div class="form-actions">
+            <button type="submit" id="confirm-button">Confirm</button>
+            <button type="button" id="date-back-button">Back</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
