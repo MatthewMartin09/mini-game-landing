@@ -11,9 +11,13 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  min-height: 100vh;
   display: grid;
   place-items: center;
   font-family:'Press Start 2P', Inter, Arial, sans-serif;
@@ -41,25 +45,28 @@ body::before {
 }
 
 .screen {
-  width: min(1500px, calc(100vw - 20px));
-  /* Sets a baseline height so it's never too short, but lets it grow if content overflows */
-  min-height: 80vh; 
+  width: min(1200px, calc(100vw - 20px));
+  height: 100vh;
   padding: 48px;
   border-radius: 24px;
   position: relative;
   z-index: 1;
-  
-  /* Optional: If you want the content inside this tall screen to be centered nicely */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+}
+
+#date-screen {
+  justify-content: flex-start;
 }
 .box {
   display: grid;
   gap: 20px;
   text-align: center;
   justify-items: center;
+  width: 100%;
 }
 
 h1,
@@ -68,7 +75,7 @@ h2 {
 }
 
 button {
-  padding: 16px 32px;
+  padding: 16px 28px;
   border: 4px solid rgba(0, 0, 0, 0.25);
   border-radius: 0;
   background: var(--accent);
@@ -78,7 +85,7 @@ button {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   width: fit-content;
-  min-width: 220px;
+  min-width: 180px;
   cursor: pointer;
   box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.15), 0 10px 0 rgba(0, 0, 0, 0.12);
   transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
@@ -156,24 +163,28 @@ button:active {
 
 .date-card {
   width: 100%;
-  max-width: 900px;
+  max-width: 860px;
+  max-height: calc(100vh - 56px);
   background: rgba(255, 255, 255, 0.08);
   border: 4px solid rgba(255, 255, 255, 0.16);
   border-radius: 28px;
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.2);
-  padding: 36px;
+  padding: 24px;
+  overflow: visible;
 }
 
 .date-layout {
   display: grid;
-  gap: 32px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
   align-items: start;
   justify-items: center;
 }
 
 .calendar-preview {
   padding: 28px;
-  width: min(520px, 100%);
+  width: 100%;
+  max-width: 520px;
   border: 4px solid rgba(255, 255, 255, 0.12);
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.03);
@@ -189,16 +200,16 @@ button:active {
 
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
 }
 
 .calendar-grid span {
   display: grid;
   place-items: center;
-  padding: 10px 0;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.75rem;
+  padding: 8px 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.68rem;
 }
 
 .calendar-day {
@@ -219,8 +230,9 @@ button:active {
 
 .date-fields {
   display: grid;
-  gap: 18px;
-  width: min(520px, 100%);
+  gap: 14px;
+  width: 100%;
+  max-width: 520px;
 }
 
 .date-fields label {
@@ -234,9 +246,9 @@ button:active {
 
 .date-fields input {
   width: 100%;
-  padding: 14px 16px;
+  padding: 12px 14px;
   border: 4px solid rgba(255, 255, 255, 0.14);
-  border-radius: 14px;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.06);
   color: white;
   font-family: 'Press Start 2P', monospace;
@@ -248,20 +260,22 @@ button:active {
 
 .form-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 16px;
   justify-content: center;
+  width: 100%;
 }
 
 #confirm-button,
 #date-back-button {
   min-width: 0;
+  width: 100%;
 }
 
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 24px;
   margin: 0 auto;
   width: 100%;
   max-width: 980px;
@@ -445,5 +459,130 @@ button:active {
   width: 100%;
   max-width: 100%;
   justify-self: center;
+}
+
+@media (max-width: 900px) {
+  .screen {
+    padding: 28px;
+  }
+
+  .date-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .date-card {
+    padding: 24px;
+  }
+
+  .calendar-preview {
+    padding: 20px;
+  }
+
+  .calendar-grid {
+    gap: 6px;
+  }
+
+  .calendar-grid span {
+    padding: 7px 0;
+    font-size: 0.7rem;
+  }
+
+  .menu-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .food-card {
+    min-height: 360px;
+    padding: 22px;
+  }
+
+  button {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 0 8px;
+  }
+
+  .screen {
+    width: calc(100vw - 16px);
+    height: 100vh;
+    padding: 12px;
+    border-radius: 20px;
+    justify-content: flex-start;
+  }
+
+  .box {
+    gap: 12px;
+  }
+
+  .date-card {
+    padding: 20px;
+  }
+
+  .date-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .calendar-preview {
+    padding: 14px;
+  }
+
+  .date-fields label {
+    font-size: 0.82rem;
+  }
+
+  .date-fields input {
+    padding: 10px 12px;
+  }
+
+  .menu-header h1 {
+    font-size: 1.7rem;
+  }
+
+  .image-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .food-card {
+    min-height: 200px;
+    padding: 16px;
+  }
+
+  .food-card img {
+    max-height: 160px;
+  }
+
+  .calendar-grid {
+    gap: 4px;
+  }
+
+  .calendar-grid span {
+    padding: 6px 0;
+    font-size: 0.65rem;
+  }
+
+  .pixel-grid {
+    height: 14px;
+  }
+
+  .transition-visual {
+    gap: 10px;
+  }
+
+  button {
+    padding: 14px 20px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .menu-actions {
+    grid-template-columns: 1fr;
+  }
 }
 
